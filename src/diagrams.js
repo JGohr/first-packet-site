@@ -103,7 +103,7 @@ DIAGRAMS.w6 = {cap:'Alice and Bob each keep a secret and send only g raised to i
   b+=T(360,226,'Eve sees p, g, A, B',{s:12.5,c:C.coralInk})+T(360,244,'but never a, b or s',{s:12,c:C.muted});
   return svgWrap(i,280,'Diffie-Hellman key exchange with small numbers: both sides compute shared secret 2 while an eavesdropper sees only public values',b);})()};
 
-DIAGRAMS.w7 = {cap:'Ember runs in two data centers that can each carry the full load. Every edge site has two paths, one to each data center, and every function gets its own segment, so a compromised sensor can\'t reach Ember\'s servers.', svg:(function(){var i='7',b='';
+DIAGRAMS.w7 = {cap:'Ember runs in two data centers that can each carry the full load, and every edge site has two paths, one to each. Each function gets its own segment, and traffic between segments must pass the site firewall, so a compromised sensor can’t reach Ember’s servers. As drawn, the single site router and site switch are still single points of failure for that site, and 7.2 asks what you’d change.', svg:(function(){var i='7',b='';
   b+=R(60,16,240,46)+T(180,36,'Data center A')+T(180,53,'Ember nodes + database',{s:11.5,c:C.muted});
   b+=R(420,16,240,46)+T(540,36,'Data center B')+T(540,53,'Ember nodes + replica',{s:11.5,c:C.muted});
   b+=L(300,39,418,39,i,{start:true})+T(360,31,'replication',{s:11.5,c:C.muted});
@@ -112,7 +112,7 @@ DIAGRAMS.w7 = {cap:'Ember runs in two data centers that can each carry the full 
   b+=L(540,62,422,146,i,{start:true,coral:true,c:C.coral,dash:true})+T(488,106,'backup · LTE',{s:12,c:C.coralInk,a:'start'});
   b+=R(210,148,300,42)+T(360,174,'Site router / firewall');
   b+=L(360,190,360,213,i);
-  b+=R(260,216,200,38)+T(360,240,'Core switch');
+  b+=R(260,216,200,38)+T(360,240,'Site switch');
   var xs=[40,200,360,520],nm=['Ember servers','Operators','Sensors / IoT','Visitor Wi-Fi'];
   for(var k=0;k<4;k++){b+='<line x1="360" y1="254" x2="'+(xs[k]+70)+'" y2="291" stroke="'+C.line+'" stroke-width="1.5"/>';
     b+=(k==0?R(xs[k],292,140,36,{f:'rgba(139,124,246,.16)',st:C.coral}):R(xs[k],292,140,36))+T(xs[k]+70,315,nm[k],{c:k==0?C.coralInk:C.ink});}
