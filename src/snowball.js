@@ -1,5 +1,5 @@
-// Snowball layer: what each week carries in, what it unlocks, Ember milestones,
-// one practical case per week traced through five lenses, and what each problem set builds on.
+// Snowball layer: what each section carries in, what it unlocks, Ember milestones,
+// one practical case per section traced through five lenses, and what each problem set builds on.
 var EMBER = {
 w0:{ms:"Set Ember's latency budget: a message should cross your lab in under 200 ms, and you can now measure where the time goes.", carry:[["Setup","Your lab VM and tools"]], unlock:[["w3","Window sizes come from the bandwidth-delay product"],["w13","Why QUIC saves a round trip"]]},
 w1:{ms:"Ember's lab LAN: you can explain every frame Ember's hosts send, and your 1.3 detector watches for anyone lying about the gateway.", carry:[["w0","Bits, signals and the latency budget"]], unlock:[["w2","Routing between Ember's subnets"],["w8","Layer 2 threats in Ember's threat model"]]},
@@ -111,13 +111,13 @@ function addBuilds(wid,pid,txt){var w=findWeek(wid);w.psets.forEach(function(p){
 addBuilds("w2","2.1","Builds on 1.1: the lookup table from your switch, now matched by prefix.");
 addBuilds("w3","3.1","Becomes Ember's first wire protocol. You'll compare it with QUIC in 13.2.");
 addBuilds("w4","4.1","Reused in the capstone to steer users to the nearest Ember node.");
-addBuilds("w5","5.1","This is Ember v0.1. Weeks 6, 8, 10 and 11 all extend this server.");
+addBuilds("w5","5.1","This is Ember v0.1. Sections 6, 8, 10 and 11 all extend this server.");
 addBuilds("w5","5.3","Ember v0.1 runs inside this container.");
 addBuilds("w6","6.1","Stretch: add this key exchange to Ember's clients so the server only relays ciphertext.");
-addBuilds("w7","7.3","The routed core for Ember Regions. Keep this topology; week 11 puts Ember on it.");
+addBuilds("w7","7.3","The routed core for Ember Regions. Keep this topology; section 11 puts Ember on it.");
 addBuilds("w8","8.2","Apply this ruleset to every Ember node.");
 addBuilds("w8","8.3","Point this at Ember's lab traffic. It's your first Ember alert.");
-addBuilds("w9","9.2","Scan your Ember lab deployment from weeks 5–8.");
+addBuilds("w9","9.2","Scan your Ember lab deployment from sections 5–8.");
 addBuilds("w10","10.2","Make this Ember's account system: the notes become Ember's per-user settings.");
 addBuilds("w11","11.1","Put three copies of your 5.1 Ember server behind it.");
 addBuilds("w11","11.2","Use the elected leader to decide which Ember node owns each chat room.");

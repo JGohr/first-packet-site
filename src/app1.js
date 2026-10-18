@@ -16,7 +16,7 @@ function stats(w){
 function setupStats(){var d=0;SETUP.verify.forEach(function(v){if(S.setup[v.id])d++;});return {d:d,t:SETUP.verify.length};}
 function totals(){var d=0,t=0;PAGES.forEach(function(w){var s=stats(w);d+=s.pd+s.qd;t+=s.pt+s.qt;});return {d:d,t:t};}
 function updateChip(){var t=totals();document.getElementById('pchip').textContent=t.d+' / '+t.t+' done';}
-function label(w){return w.id==='final'?'Final project':'Week '+w.num;}
+function label(w){return w.id==='final'?'Final project':'Section '+w.num;}
 function refLink(r){
   if(r[0]==='Setup')return '<a href="#setup">Setup</a>: '+esc(r[1]);
   var w=byId(r[0]);return '<a href="#'+w.id+'">'+label(w)+'</a>: '+esc(r[1]);

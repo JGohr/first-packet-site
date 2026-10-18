@@ -16,7 +16,7 @@ function route(){
     CUR=id;land.hidden=true;ws.hidden=false;
     if(id==='setup'){doc.innerHTML=renderSetup();setCrumb('Setup');}
     else if(id==='final'){doc.innerHTML=renderFinalPage();setCrumb('Final project');}
-    else{doc.innerHTML=renderWeekPage(w);setCrumb('Week '+w.num+' · '+w.title);}
+    else{doc.innerHTML=renderWeekPage(w);setCrumb('Section '+w.num+' · '+w.title);}
     renderSide(id);
   } else {
     CUR='home';ws.hidden=true;land.hidden=false;renderLanding();setCrumb('Home');

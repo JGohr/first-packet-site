@@ -1,4 +1,4 @@
-// One diagram per week. Single dark theme, so literal token hexes are used.
+// One diagram per section. Single dark theme, so literal token hexes are used.
 var C = {ink:'#ebebea', body:'#c9c8c4', muted:'#9b9a97', coral:'#8b7cf6', coralInk:'#b3a5ff', teal:'#5fc4ad', amber:'#ffa344', red:'#ff7b72', box:'#2a2a2a', deep:'#161616', line:'rgba(255,255,255,.2)'};
 function svgWrap(id, h, label, body){
   return '<svg viewBox="0 0 720 '+h+'" role="img" aria-label="'+label+'" xmlns="http://www.w3.org/2000/svg">'
