@@ -1,12 +1,10 @@
 /* Part 2: problem sets and checks */
-var DIFF={Easy:'green',Medium:'orange',Hard:'red'};
 function list(items,cls){return '<ul'+(cls?' class="'+cls+'"':'')+'>'+items.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul>';}
 
 function probHTML(p){
   var d=!!S.done[p.id],h='<article class="prob'+(d?' done':'')+'">';
   h+='<div class="prob-h"><div><div class="id">Problem '+esc(p.id)+'</div><h3>'+esc(p.title)+'</h3><div class="chips">'
-    +'<span class="tag '+DIFF[p.diff]+'">'+p.diff+'</span><span class="tag gray">'+esc(p.kind)+'</span>'
-    +'<span class="tag gray">'+esc(p.time)+'</span><span class="tag gray">'+esc(p.lang)+'</span></div></div>'
+    +'<span class="tools-l">Tools</span><span class="tag gray">'+esc(p.lang)+'</span></div></div>'
     +'<label class="done-t"><input type="checkbox" data-done="'+p.id+'"'+(d?' checked':'')+'> Solved</label></div><div class="prob-b">';
   h+='<div class="ps"><h4>Problem</h4><p>'+p.problem+'</p>'+(p.builds?'<p class="builds">↳ '+esc(p.builds)+'</p>':'')+'</div>';
   if(p.input)h+='<div class="ps"><h4>Input / output</h4><div class="io"><div><b>Input</b><span>'+p.input+'</span></div><div><b>Output</b><span>'+p.output+'</span></div></div></div>';
