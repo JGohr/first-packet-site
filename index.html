@@ -184,9 +184,10 @@ figure.fig figcaption{margin-top:12px;font-size:14px;color:var(--muted);line-hei
 .case-top{padding:16px 18px;border-bottom:1px solid var(--hair)}
 .case-top .lbl{display:block;margin-bottom:4px}
 .case-top h3{font-size:18px;font-weight:700}
-.lensrow{display:grid;grid-template-columns:118px minmax(0,1fr);gap:14px;padding:14px 18px;border-bottom:1px solid var(--hair)}
+.lensrow{padding:16px 18px;border-bottom:1px solid var(--hair)}
 .lensrow:last-child{border-bottom:0}
-.lensrow .tag{justify-self:start;margin-top:2px}
+.lensrow h4{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;color:var(--muted)}
+.lensrow.blue h4{color:var(--c-blue)} .lensrow.green h4{color:var(--c-green)} .lensrow.red h4{color:var(--c-red)} .lensrow.purple h4{color:var(--c-purple)}
 .lensrow p{color:var(--body);font-size:15.5px;line-height:1.6}
 
 /* Problems */
@@ -297,7 +298,6 @@ textarea{width:100%;min-height:104px;background:var(--soft);border:1px solid var
   .top nav a.hide-s,.crumb{display:none}
   .tints,.ideas,.io,.gallery{grid-template-columns:minmax(0,1fr)}
   .prob-h{grid-template-columns:minmax(0,1fr)}
-  .lensrow{grid-template-columns:minmax(0,1fr);gap:6px}
   .pager{grid-template-columns:minmax(0,1fr)}
   .pager a.next{grid-column:1}
   .sec{padding-block:56px}
@@ -1726,7 +1726,7 @@ function renderSetup(){
 function lensCaseHTML(c){
   var rows=[['think','Think','gray'],['design','Design','blue'],['protect','Protect','green'],['attack','Attack','red'],['innovate','Innovate','purple']];
   var h='<div class="case-h"><div class="case-top"><span class="lbl">The example</span><h3>'+esc(c.t)+'</h3></div>';
-  rows.forEach(function(r){h+='<div class="lensrow"><span class="tag '+r[2]+'">'+r[1]+'</span><p>'+esc(c[r[0]])+'</p></div>';});
+  rows.forEach(function(r){h+='<div class="lensrow '+r[2]+'"><h4>'+r[1]+'</h4><p>'+esc(c[r[0]])+'</p></div>';});
   return h+'</div>';
 }
 
@@ -1738,7 +1738,7 @@ function renderWeekPage(w){
   var D=DIAGRAMS[w.id];
   if(D)h+='<h2 id="b-fig">See it</h2><figure class="fig"><div class="scroll">'+D.svg+'</div><figcaption>'+esc(D.cap)+'</figcaption></figure>';
   h+='<h2>Core ideas</h2><div class="ideas">'+w.ideas.map(function(x){return '<div class="idea"><h3>'+x[0]+'</h3><p>'+x[1]+'</p></div>';}).join('')+'</div>';
-  h+='<h2>One example, five lenses</h2><p class="para" style="margin-bottom:12px">One real-world situation, followed through every way of looking at it.</p>'+lensCaseHTML(LENSCASE[w.id]);
+  h+='<h2>One example, five lenses</h2>'+lensCaseHTML(LENSCASE[w.id]);
   h+='<h2 id="b-ps">Problem set '+w.num+'</h2><div class="psets">'+w.psets.map(probHTML).join('')+'</div>';
   var s=stats(w);
   h+='<h2 id="b-check">Check your work</h2><div class="score"><div><b id="scoreN">'+s.qd+' / '+s.qt+'</b> <span>answered correctly</span></div><button class="btn sm" type="button" id="resetQ">Reset answers</button></div>'

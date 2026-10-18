@@ -170,9 +170,10 @@ figure.fig figcaption{margin-top:12px;font-size:14px;color:var(--muted);line-hei
 .case-top{padding:16px 18px;border-bottom:1px solid var(--hair)}
 .case-top .lbl{display:block;margin-bottom:4px}
 .case-top h3{font-size:18px;font-weight:700}
-.lensrow{display:grid;grid-template-columns:118px minmax(0,1fr);gap:14px;padding:14px 18px;border-bottom:1px solid var(--hair)}
+.lensrow{padding:16px 18px;border-bottom:1px solid var(--hair)}
 .lensrow:last-child{border-bottom:0}
-.lensrow .tag{justify-self:start;margin-top:2px}
+.lensrow h4{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;color:var(--muted)}
+.lensrow.blue h4{color:var(--c-blue)} .lensrow.green h4{color:var(--c-green)} .lensrow.red h4{color:var(--c-red)} .lensrow.purple h4{color:var(--c-purple)}
 .lensrow p{color:var(--body);font-size:15.5px;line-height:1.6}
 
 /* Problems */
@@ -283,7 +284,6 @@ textarea{width:100%;min-height:104px;background:var(--soft);border:1px solid var
   .top nav a.hide-s,.crumb{display:none}
   .tints,.ideas,.io,.gallery{grid-template-columns:minmax(0,1fr)}
   .prob-h{grid-template-columns:minmax(0,1fr)}
-  .lensrow{grid-template-columns:minmax(0,1fr);gap:6px}
   .pager{grid-template-columns:minmax(0,1fr)}
   .pager a.next{grid-column:1}
   .sec{padding-block:56px}

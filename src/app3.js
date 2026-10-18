@@ -47,7 +47,7 @@ function renderSetup(){
 function lensCaseHTML(c){
   var rows=[['think','Think','gray'],['design','Design','blue'],['protect','Protect','green'],['attack','Attack','red'],['innovate','Innovate','purple']];
   var h='<div class="case-h"><div class="case-top"><span class="lbl">The example</span><h3>'+esc(c.t)+'</h3></div>';
-  rows.forEach(function(r){h+='<div class="lensrow"><span class="tag '+r[2]+'">'+r[1]+'</span><p>'+esc(c[r[0]])+'</p></div>';});
+  rows.forEach(function(r){h+='<div class="lensrow '+r[2]+'"><h4>'+r[1]+'</h4><p>'+esc(c[r[0]])+'</p></div>';});
   return h+'</div>';
 }
 
@@ -59,7 +59,7 @@ function renderWeekPage(w){
   var D=DIAGRAMS[w.id];
   if(D)h+='<h2 id="b-fig">See it</h2><figure class="fig"><div class="scroll">'+D.svg+'</div><figcaption>'+esc(D.cap)+'</figcaption></figure>';
   h+='<h2>Core ideas</h2><div class="ideas">'+w.ideas.map(function(x){return '<div class="idea"><h3>'+x[0]+'</h3><p>'+x[1]+'</p></div>';}).join('')+'</div>';
-  h+='<h2>One example, five lenses</h2><p class="para" style="margin-bottom:12px">One real-world situation, followed through every way of looking at it.</p>'+lensCaseHTML(LENSCASE[w.id]);
+  h+='<h2>One example, five lenses</h2>'+lensCaseHTML(LENSCASE[w.id]);
   h+='<h2 id="b-ps">Problem set '+w.num+'</h2><div class="psets">'+w.psets.map(probHTML).join('')+'</div>';
   var s=stats(w);
   h+='<h2 id="b-check">Check your work</h2><div class="score"><div><b id="scoreN">'+s.qd+' / '+s.qt+'</b> <span>answered correctly</span></div><button class="btn sm" type="button" id="resetQ">Reset answers</button></div>'
