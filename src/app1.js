@@ -29,6 +29,8 @@ function meter(d,t){return '<div class="meter"><div class="bar"><i style="width:
 
 function renderLanding(){
   var ss=setupStats(),g='';
+  var nps=0,nq=0;PAGES.forEach(function(w){nps+=psetsOf(w).length;nq+=(w.check||[]).length;});
+  document.getElementById('factSec').textContent=WEEKS.length;document.getElementById('factPs').textContent=nps;document.getElementById('factQ').textContent=nq;
   g+='<a class="g-card" href="#setup"><div class="g-top" style="background:var(--t-gray);color:var(--muted)">Start here</div>'
     +'<div class="g-body"><h3>Setup: build your lab</h3><p>Two virtual machines, Wireshark, Docker, containerlab and the course Python environment.</p>'+meter(ss.d,ss.t)+'</div></a>';
   PAGES.forEach(function(w,i){

@@ -36,9 +36,9 @@
         <p class="lede">Fourteen sections from the speed of light to the frontier. Each section adds a layer of understanding and a piece of Ember, a messaging platform you build from scratch, defend, attack and ship as your final project.</p>
         <div class="ctas"><a class="btn light" href="#setup">Set up your lab</a><a class="btn" href="#w0">Start section 0</a></div>
         <div class="facts">
-          <div><b>14</b><span>sections + capstone</span></div>
-          <div><b>44</b><span>problem sets</span></div>
-          <div><b>64</b><span>self-checks</span></div>
+          <div><b id="factSec">14</b><span>sections + capstone</span></div>
+          <div><b id="factPs">44</b><span>problem sets</span></div>
+          <div><b id="factQ">64</b><span>self-checks</span></div>
           <div><b>1</b><span>system you build</span></div>
         </div>
       </div>
@@ -88,12 +88,25 @@
   <section class="sec">
     <div class="wrap">
       <div class="sec-h"><span class="lbl">Problem sets</span><h2>Every problem reads like a coding challenge</h2><p class="intro">Coding and CTF problems are written like LeetCode: a precise statement, input and output, worked examples, constraints and starter code. Lab and design problems keep the same shape, with steps instead of I/O. Each section ends with a self-check you can submit and grade.</p></div>
-      <div class="tints" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+      <div class="tints four">
         <div class="tint purple"><h3>Statement + I/O</h3><p>Exactly what to build, its signature, and what it returns.</p></div>
         <div class="tint blue"><h3>Examples</h3><p>Inputs, expected outputs and why. Your code must reproduce them.</p></div>
         <div class="tint orange"><h3>Constraints</h3><p>Limits on size, time and tools that force the real design decisions.</p></div>
         <div class="tint green"><h3>Acceptance</h3><p>A checklist that defines “done.” Tick Solved only when every item holds.</p></div>
       </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-h"><span class="lbl">Where this leads</span><h2>A foundation for real roles</h2><p class="intro">The course doesn't train you for one job. It gives you the ground every one of these stands on, and points you at what to learn next.</p></div>
+      <div class="tints four">
+        <div class="tint blue"><h3>Network engineer</h3><p>Sections 0–7 and 11: addressing, routing, transport, design and failure analysis.</p></div>
+        <div class="tint green"><h3>SOC analyst</h3><p>Sections 8–9: logs, detection, incident response and attacker behavior. Next: a SIEM query language and Windows in depth.</p></div>
+        <div class="tint red"><h3>Application security</h3><p>Sections 6 and 10: cryptography, injection, sessions, modern login and supply chain.</p></div>
+        <div class="tint purple"><h3>Cloud and platform</h3><p>Sections 5, 11 and 13: containers, cloud networks and identity, and the kernel's fast path.</p></div>
+      </div>
+      <p class="intro" style="margin-top:18px">It covers much of the ground of CompTIA Network+ and Security+, but it isn't exam prep. Windows and Active Directory get one section's worth of ideas, not a full lab.</p>
     </div>
   </section>
 
