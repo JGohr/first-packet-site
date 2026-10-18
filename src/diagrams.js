@@ -142,7 +142,7 @@ DIAGRAMS.w9 = {cap:'An intrusion is a chain of steps, and each step has a contro
   b+=T(20,212,'Defenders win by breaking any one link.',{s:12,c:C.muted,a:'start'});
   return svgWrap(i,225,'Kill chain: recon, initial access, persistence, lateral movement and objective, each with a defensive control below it',b);})()};
 
-DIAGRAMS.w10 = {cap:'A customer named O\'Brien breaks the concatenated query, because their apostrophe ends the string early and the rest gets parsed as SQL. An attacker uses the same flaw on purpose. Parameterized queries send the value separately, so it can never become code.', svg:(function(){var i='10',b='';
+DIAGRAMS.w10 = {cap:'A user named O\'Brien breaks the concatenated query, because their apostrophe ends the string early and the rest gets parsed as SQL. An attacker uses the same flaw on purpose. Parameterized queries send the value separately, so it can never become code.', svg:(function(){var i='10',b='';
   b+=R(20,16,330,220,{f:C.deep,r:10})+R(370,16,330,220,{f:C.deep,r:10});
   b+=T(40,44,'Concatenated',{s:14,w:600,c:C.red,a:'start'})+T(40,62,'input pasted into the query text',{s:12,c:C.muted,a:'start'});
   b+=T(40,100,'SELECT id FROM users',{m:1,s:13,a:'start'});

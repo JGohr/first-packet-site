@@ -13,13 +13,13 @@ First Packet: a single-page, static course site (no framework, no bundler, no de
 - Theme: single dark theme. Colors are CSS tokens on `:root` in `style.css`; diagrams use the hex palette object `C` at the top of `diagrams.js`.
 
 ## Content model
-- `WEEKS[]` (weeks_a.js, weeks_b.js): `id` (`w0`…`w13`), `num`, `layer`, `title`, `h1`, `blurb`, `big` (HTML), `strip` (shell command or header field diagram), `ideas`, `psets`, `check`, `reads`. The old `lenses` field is unused.
+- `WEEKS[]` (weeks_a.js, weeks_b.js): `id` (`w0`…`w13`), `num`, `layer`, `title`, `h1`, `blurb`, `big` (HTML), `strip` (shell command or header field diagram), `ideas`, `psets`, `check`, `reads`.
 - Problem set fields: `id`, `title`, `kind`, `diff` (Easy|Medium|Hard), `time`, `lang`, `problem`, optional `input`/`output`, `examples` [{i,o,why}], `task`, `constraints`, `starter`, `hints`, `accept`, `stretch`, `builds`.
 - Check types: `num` (a, tol, unit), `text` (acc: lowercase accepted answers), `choice` (o, a = index), `explain` (model answer, self-graded).
 - `EMBER[weekId]`: `ms` (milestone), `carry`, `unlock`. Refs are `[weekId | "Setup" | "final", text]`.
 - `LENSCASE[weekId]`: one real-world scenario traced through think/design/protect/attack/innovate.
 - `TESTS[psetId]` (tests.js): in-browser Python tests for pure-logic problems. `stub` (editor starter when the problem has no `starter`), `tests` [{pre, run, want, show, hide}]. A test passes when `eval(run) == eval(want)`. Passing every test ticks Solved. Learner code saves to `S.code`.
-- `snowball.js` also overrides some problem sets and checks by id. Check it before editing those weeks.
+- `addBuilds` calls in `snowball.js` set each problem set's `builds` line (how it feeds later weeks and Ember). All other content lives in the week files.
 
 ## Routing
 Hash routes: `#home`, `#setup`, `#w0`…`#w13`, `#final`. Rendering lives in `app3.js`; routing and events live in `app4.js`; the code editor and Pyodide worker live in `ide.js`.

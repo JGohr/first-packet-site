@@ -1,5 +1,5 @@
 // Snowball layer: what each week carries in, what it unlocks, Ember milestones,
-// one practical case per week traced through five lenses, and overrides.
+// one practical case per week traced through five lenses, and what each problem set builds on.
 var EMBER = {
 w0:{ms:"Set Ember's latency budget: a message should cross your lab in under 200 ms, and you can now measure where the time goes.", carry:[["Setup","Your lab VM and tools"]], unlock:[["w3","Window sizes come from the bandwidth-delay product"],["w13","Why QUIC saves a round trip"]]},
 w1:{ms:"Ember's lab LAN: you can explain every frame Ember's hosts send, and your 1.3 detector watches for anyone lying about the gateway.", carry:[["w0","Bits, signals and the latency budget"]], unlock:[["w2","Routing between Ember's subnets"],["w8","Layer 2 threats in Ember's threat model"]]},
@@ -97,54 +97,16 @@ w12:{t:"A journalist protecting a confidential source",
  attack:"Timing alone (“the source's phone was active right before the story ran”) can identify a source without breaking any encryption.",
  innovate:"Mixnets add cover traffic and delays to break timing correlation, trading speed for stronger privacy."},
 w13:{t:"A small hosting provider under a flood attack",
- think:"Millions of junk packets per second hit one customer's address, and the servers spend all their CPU just receiving them.",
+ think:"Millions of junk packets per second hit one service's address, and the servers spend all their CPU just receiving them.",
  design:"Drop bad traffic as early as possible: upstream scrubbing for huge floods, and XDP on the servers for the rest.",
  protect:"Rate-limit per source with an eBPF program, and keep known-good clients flowing with an allowlist.",
  attack:"Attackers change patterns as filters adapt, so detection has to update automatically, not wait for someone to type a rule mid-incident.",
  innovate:"Programmable switches can now run the same filtering logic in hardware at full line rate."}
 };
 
-/* ---------- Overrides: remove retail framing, tie problems to Ember ---------- */
+/* ---------- Builds: how each problem set feeds the next, and Ember ---------- */
 function findWeek(id){for(var i=0;i<WEEKS.length;i++)if(WEEKS[i].id===id)return WEEKS[i];}
-function setPset(wid,pid,obj){var w=findWeek(wid);for(var i=0;i<w.psets.length;i++)if(w.psets[i].id===pid){w.psets[i]=obj;return;}}
 function addBuilds(wid,pid,txt){var w=findWeek(wid);w.psets.forEach(function(p){if(p.id===pid)p.builds=txt;});}
-
-setPset("w2","2.2",{id:"2.2", title:"Carve", kind:"Design", diff:"Medium", time:"~3 hrs", lang:"Spreadsheet or Markdown",
-problem:"Write the address plan for Ember's private network. Ember will eventually run in up to 200 sites (data centers and edge locations), all inside <code>10.40.0.0/16</code>. Every site needs these networks:",
-task:["Ember servers: up to 40 hosts","Operator workstations: up to 20","Sensors / IoT: up to 60 devices","Network management: up to 15 devices","Visitor Wi-Fi: up to 200 clients"],
-constraints:["Every site must summarize to exactly one route at the core","Site N's subnets must be derivable from N alone","Must fit 200 sites inside the /16","Warning: naively, the numbers don't fit. Decide what doesn't need to live in 10.40.0.0/16."],
-hints:["A /16 holds 256 /24s. If each site gets a /24, there's room for 200 sites and some to spare.","Visitor Wi-Fi only needs the internet, not Ember. Where else could those addresses come from?"],
-accept:["A table of every network with its prefix size and the reason for that size","A formula: site N → which /24, and which slice of it holds Ember's servers","A paragraph on visitor Wi-Fi, naming the security benefit of your choice"]});
-
-setPset("w7","7.1",{id:"7.1", title:"Ember Regions", kind:"Design", diff:"Hard", time:"~8 hrs", lang:"Design doc + diagram",
-problem:"Design the network for Ember running across two data centers and a growing number of edge sites, using your week 2 address plan. Write it as a design doc another engineer could build from.",
-task:["Goals and non-goals","Data center layout: Ember servers, database, key servers, management","Edge sites: switching, VLANs, wireless","WAN: primary and backup paths for each site, and how failover happens","How the two data centers share load and replicate data","Isolation: a table of every allowed flow (source, destination, port, reason), especially to the database and key servers","Decisions, with the alternatives you rejected and why","Open risks"],
-constraints:["Losing either data center can't stop Ember","Edge-site failover in under 60 seconds","Ember's database is reachable only from Ember app servers","A new edge site can be deployed in one day from your doc"],
-accept:["A peer can build a new edge site from your doc without asking you anything","Every allowed flow to the database is in the table, and everything else is denied","Your diagram matches your flow table"]});
-setPset("w7","7.2",{id:"7.2", title:"What Breaks", kind:"Analyze", diff:"Medium", time:"~3 hrs", lang:"Table",
-problem:"Run a failure-mode analysis on your Ember Regions design.",
-task:["List ten failures, including: an edge switch, a site's primary WAN link, one entire data center, DNS, a power circuit, an expired certificate, and a bad configuration pushed to every site.","For each: blast radius, how you'd detect it, time to recover, and one design change that shrinks it."],
-accept:["No single failure in your final design stops Ember everywhere","The “bad config push” row has a real answer (staged rollout, canary sites, automatic rollback)"]});
-findWeek("w7").check=[
-{t:"num", q:"An edge site has two independent WAN links, each available 99% of the time. What's the site's availability, assuming either link is enough?", a:99.99, tol:0.005, unit:"%", why:"Both are down 1% × 1% = 0.01% of the time."},
-{t:"choice", q:"In a leaf-spine data center, how many hops is it from any leaf switch to any other?", o:["1","2 (leaf → spine → leaf)","Depends on the rack","4"], a:1, why:"That predictability is the point of the design."},
-{t:"choice", q:"Why put Ember's database in its own segment that only Ember's app servers can reach?", o:["Faster queries","Smaller blast radius: a compromised client, sensor or workstation can't reach the database","Fewer IP addresses used","Better Wi-Fi coverage"], a:1, why:"Segmentation limits lateral movement to your most valuable data."},
-{t:"explain", q:"Name a single point of failure that's common in real networks, and how you'd remove it.", model:"A good answer names something concrete, like one WAN circuit, one core switch, one power feed or UPS, or one central DNS/DHCP server. The fix adds independence: a second path from a different carrier or medium, a redundant switch, local services, or dual power. It also says how failover happens and how you'd know it happened."}];
-
-setPset("w8","8.1",{id:"8.1", title:"Threat Model", kind:"Analyze", diff:"Medium", time:"~3 hrs", lang:"Diagram + table",
-problem:"Apply STRIDE to one Ember message, from the sender's client to the recipient's, across your Ember Regions design.",
-task:["Draw the data flow: sender client → load balancer → Ember server → database → recipient client, marking every trust boundary.","For each component and flow, list the STRIDE threats that apply.","Name the control for each threat, or explicitly accept the risk.","Rank your top five risks by likelihood × impact."],
-accept:["Every threat has a control or a written risk acceptance","Your top risk is something you'd actually fix first"]});
-
-setPset("w9","9.3",{id:"9.3", title:"Seventy-Six Days", kind:"Write-up", diff:"Medium", time:"~3 hrs", lang:"Writing",
-problem:"Map the 2017 Equifax breach to the kill chain using the public U.S. Government Accountability Office report (GAO-18-559).",
-task:["Trace each stage: the unpatched web framework on a public dispute portal, the movement across internal systems and databases, and the data leaving the network.","At each stage, name the control that could have stopped or detected it.","Find the reason the data left unnoticed for 76 days. It involves an expired certificate on a traffic-inspection device.","Compare with your Ember defenses from week 8."],
-accept:["A stage-by-stage table: attacker action, missed control, what would have worked","You name the single failed control that let the data leave unseen, and explain why a certificate mattered","An honest paragraph on whether Ember's defenses would have caught it"]});
-findWeek("w9").check[0]={t:"choice", q:"How did attackers first get into Equifax's network in 2017?", o:["A phishing email","An unpatched vulnerability in a public web application framework (Apache Struts)","A stolen laptop","A rogue employee"], a:1, why:"A fix for the flaw had been available for about two months."};
-
-findWeek("w8").check[0]={t:"text", q:"An attacker changes the contents of an Ember message in transit. Which STRIDE category is that?", acc:["tampering","t"], why:"Tampering means modifying data in transit or at rest."};
-findWeek("w2").check[3]={t:"num", q:"If every site gets its own /24, how many sites fit in 10.40.0.0/16?", a:256, tol:0, unit:"sites", why:"2^(24−16) = 256."};
-findWeek("w2").check[4]={t:"explain", q:"Why does it matter that each site summarizes to a single route?", model:"The core only needs one route per site instead of one per subnet, so tables stay small and lookups fast. A change inside a site doesn't ripple out to every router. Troubleshooting gets easier too, because the address tells you which site you're looking at."};
 
 addBuilds("w2","2.1","Builds on 1.1: the lookup table from your switch, now matched by prefix.");
 addBuilds("w3","3.1","Becomes Ember's first wire protocol. You'll compare it with QUIC in 13.2.");
@@ -163,7 +125,3 @@ addBuilds("w12","12.1","Sketch how Ember's relays could use layered encryption t
 addBuilds("w13","13.1","Attach it in front of your 11.1 load balancer and rate-limit Ember's port.");
 addBuilds("w13","13.3","Write your RFC as the specification of the Ember protocol.");
 
-FINAL.h1="Final project: Ember 1.0";
-FINAL.blurb="Everything you built comes together. Deploy Ember across your lab as a real service, attack it, fix it, and present it as if a team will run it tomorrow. Or, if you'd rather, take the same four steps with a system of your own design.";
-FINAL.ideas=[["Ember in a box","One containerlab file that brings up Ember Regions: two data centers, an edge site, three Ember nodes, the load balancer and monitoring. Demo a data center failing live.","A containerlab file declares every node, link and image, so <code>containerlab deploy</code> builds the whole Ember Regions lab in minutes and <code>containerlab destroy</code> removes it. Reuse your 7.3 OSPF ring as the core, your 11.1 balancer in front of three copies of your 5.1 server, and your 8.2 ruleset on every node. For the demo, start a client sending one message a second, then stop every container in one data center. The audience should see a short gap, a log line marking backends down, and delivery resuming. Measure that gap in seconds and compare it with the failover target in your 7.1 design doc. The demo proves your design made a real promise."],["Ember sensor","A Raspberry Pi running Zeek plus your detectors from weeks 1 and 8, with a dashboard of everything Ember's network does.","Plug the Pi into a mirrored switch port (SPAN) so it receives a copy of every packet without sitting in the path. If the Pi fails, Ember keeps running. Zeek turns packets into logs: <code>conn.log</code> for every connection and <code>dns.log</code> for every query. Feed them to your 1.3 ARP detector and 8.3 scan detector, and chart who talks to whom. A Pi 4 handles a lab’s traffic comfortably, though not a saturated gigabit link. For the capstone’s attack step, scan Ember from another lab VM and show the alert firing, with the time from first probe to alert. Then show an hour of normal traffic with no false alarms, or explain each one."],["Ember mobile relay","A WireGuard-based relay for Ember clients on untrusted networks, with automated key rotation and a threat model of what the relay operator can see.","WireGuard names each peer by a public key and renegotiates session keys about every two minutes while traffic flows, which gives forward secrecy. Rotating the long-term keys is your job: generate a new pair with <code>wg genkey</code> and <code>wg pubkey</code>, install the new public key on the server, then remove the old one, on a schedule and without dropping users. The threat model is the interesting part. The relay operator sees each client’s real IP, connection times and traffic volume, but only ciphertext as long as Ember’s week 6 end-to-end encryption is on. Write that down as a table, and build the status page from each peer’s last handshake time in <code>wg show</code>."],["Ember edge","Your week 4 resolver and week 11 balancer routing users to the nearest of three Ember nodes, surviving node failure.","Your resolver answers <code>ember.lab</code> differently depending on who asks: a client in site 1’s 10.40.1.0/24 gets the Ember node nearest that site, and a client in site 2 gets the node nearest it. Keep the TTL short, say 30 seconds, so clients move within about 30 seconds of the resolver noticing a dead node. Behind each answer, your 11.1 balancer handles failures that DNS is too slow for. Two layers of failover at two speeds is how real content networks work. For the demo, kill the nearest node and show the next query getting a different answer. Then name the cost: some resolvers and clients cache longer than the TTL you set."]];
-FINAL.pset.accept=["Touches at least three layers of the stack","Has a design doc, a diagram and a threat model","You attacked it in your own lab and fixed at least one real finding","Presented, with a written post-mortem"];
