@@ -14,7 +14,7 @@ First Packet: a single-page, static course site (no framework, no bundler, no de
 
 ## Content model
 - `WEEKS[]` (weeks_a.js, weeks_b.js): `id` (`w0`…`w13`), `num`, `layer`, `title`, `h1`, `blurb`, `big` (HTML), `strip` (shell command or header field diagram), `terms` ([term, definition] pairs shown as Key terms under the big idea; 6–14, defined once in the first section that needs them), `ideas`, `psets`, `check`, `reads`.
-- Problem set fields: `id`, `title`, `lang` (the tools needed; the only tag shown), `problem`, optional `input`/`output`, `examples` [{i,o,why}], `task`, `constraints`, `starter`, `hints`, `accept`, `stretch`, `builds`.
+- Problem set fields: `id`, `title`, `lang` (the tools needed; the only tag shown), `problem`, optional `input`/`output`, `examples` [{i,o,why}], `task`, `constraints`, `starter`, `hints`, `accept`, `stretch`, `builds`, optional `model` (HTML model answer for design and writing problems, shown collapsed after the stretch).
 - Check types: `num` (a, tol, unit), `text` (acc: lowercase accepted answers), `choice` (o, a = index), `explain` (model answer, self-graded).
 - `EMBER[weekId]`: `ms` (milestone), `carry`, `unlock`. Refs are `[weekId | "Setup" | "final", text]`.
 - `LENSCASE[weekId]`: one real-world scenario traced through think/design/protect/attack/innovate.

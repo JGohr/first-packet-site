@@ -27,6 +27,7 @@ function probHTML(p){
   }
   h+='<div class="ps"><h4>Acceptance criteria</h4>'+list(p.accept,'todo')+'</div>';
   if(p.stretch)h+='<div class="ps"><h4>Stretch</h4>'+list(p.stretch)+'</div>';
+  if(p.model)h+='<div class="ps"><h4>Model answer</h4><details class="tog"><summary>Show it once you’ve written yours</summary><div class="tb">'+p.model+'</div></details></div>';
   return h+'</div></article>';
 }
 
