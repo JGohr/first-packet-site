@@ -179,6 +179,11 @@ figure.fig figcaption{margin-top:12px;font-size:14px;color:var(--muted);line-hei
 .lensrow.blue h4{color:var(--c-blue)} .lensrow.green h4{color:var(--c-green)} .lensrow.red h4{color:var(--c-red)} .lensrow.purple h4{color:var(--c-purple)}
 .lensrow p{color:var(--body);font-size:15.5px;line-height:1.6}
 
+.terms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 28px;margin:0}
+.terms > div{padding:12px 0;border-top:1px solid var(--hair);min-width:0}
+.terms dt{font-size:15px;font-weight:600;color:var(--ink)}
+.terms dd{margin:3px 0 0;font-size:14.5px;line-height:1.55;color:var(--body)}
+
 /* In-browser editor */
 .ide{border:1px solid var(--hair2);border-radius:var(--r);overflow:hidden;background:var(--deep)}
 .ide-bar,.ide-foot{display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--soft);font-size:12.5px;color:var(--muted)}
@@ -306,7 +311,7 @@ textarea{width:100%;min-height:104px;background:var(--soft);border:1px solid var
 @media (max-width:640px){
   .ide-bar .ide-keys{display:none}
   .top nav a.hide-s,.crumb{display:none}
-  .tints,.io,.gallery{grid-template-columns:minmax(0,1fr)}
+  .tints,.io,.gallery,.terms{grid-template-columns:minmax(0,1fr)}
   .prob-h{grid-template-columns:minmax(0,1fr)}
   .pager{grid-template-columns:minmax(0,1fr)}
   .pager a.next{grid-column:1}

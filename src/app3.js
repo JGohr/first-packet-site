@@ -60,6 +60,7 @@ function renderWeekPage(w){
   h+='<div class="p-icon">'+w.num+'</div><h1>'+esc(w.h1)+'</h1>';
   h+=callout('gray','↩','What you\'re carrying in','<ul>'+E.carry.map(function(r){return '<li>'+refLink(r)+'</li>';}).join('')+'</ul>');
   h+='<h2 id="b-idea">The big idea</h2>'+callout('purple','★','','<div class="bigidea">'+w.big+'</div>')+stripHTML(w.strip);
+  if(w.terms)h+='<h2 id="b-terms">Key terms</h2><dl class="terms">'+w.terms.map(function(t){return '<div><dt>'+t[0]+'</dt><dd>'+t[1]+'</dd></div>';}).join('')+'</dl>';
   var D=DIAGRAMS[w.id];
   if(D)h+='<h2 id="b-fig">See it</h2><figure class="fig"><div class="scroll">'+D.svg+'</div><figcaption>'+esc(D.cap)+'</figcaption></figure>';
   h+='<h2>Core ideas</h2>'+ideasHTML(w.ideas);
