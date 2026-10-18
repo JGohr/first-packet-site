@@ -140,7 +140,7 @@ DIAGRAMS.w9 = {cap:'An intrusion is a chain of steps, and each step has a contro
     b+='<line x1="'+cx+'" y1="84" x2="'+cx+'" y2="128" stroke="'+C.muted+'" stroke-dasharray="4 4"/>';
     var hl=k==3;b+=(hl?R(xs[k],130,112,56,{f:'rgba(139,124,246,.16)',st:C.coral}):R(xs[k],130,112,56,{f:C.deep}))+T(cx,154,ct[k][0],{s:12.5,c:hl?C.coralInk:C.body})+T(cx,171,ct[k][1],{s:12.5,c:hl?C.coralInk:C.body});}
   b+=T(20,212,'Defenders win by breaking any one link.',{s:12,c:C.muted,a:'start'});
-  return svgWrap(i,225,'Kill chain: recon, initial access, persistence, lateral movement and objective, each with a defensive control below it',b);})()};
+  return svgWrap(i,225,'A simplified attack chain: recon, initial access, persistence, lateral movement and objective, each with a defensive control below it',b);})()};
 
 DIAGRAMS.w10 = {cap:'A user named O\'Brien breaks the concatenated query, because their apostrophe ends the string early and the rest gets parsed as SQL. An attacker uses the same flaw on purpose. Parameterized queries send the value separately, so it can never become code.', svg:(function(){var i='10',b='';
   b+=R(20,16,330,220,{f:C.deep,r:10})+R(370,16,330,220,{f:C.deep,r:10});
