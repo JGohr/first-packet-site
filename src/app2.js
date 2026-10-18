@@ -20,7 +20,8 @@ function probHTML(p){
     h+='</div>';
   }
   if(p.constraints)h+='<div class="ps"><h4>Constraints</h4>'+list(p.constraints)+'</div>';
-  if(p.starter)h+='<div class="ps"><h4>Starter code</h4>'+codeBlock(p.starter,p.lang)+'</div>';
+  if(TESTS[p.id])h+=ideHTML(p);
+  else if(p.starter)h+='<div class="ps"><h4>Starter code</h4>'+codeBlock(p.starter,p.lang)+'</div>';
   if(p.hints){
     h+='<div class="ps"><h4>Hints</h4>';
     p.hints.forEach(function(t,i){h+='<details class="tog"><summary>Hint '+(i+1)+'</summary><div class="tb">'+t+'</div></details>';});

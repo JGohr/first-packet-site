@@ -3,8 +3,8 @@
 from pathlib import Path
 
 SRC = Path(__file__).parent / "src"
-JS_ORDER = ["diagrams.js", "weeks_a.js", "weeks_b.js", "snowball.js", "setup.js",
-            "app1.js", "app2.js", "app3.js", "app4.js"]
+JS_ORDER = ["diagrams.js", "weeks_a.js", "weeks_b.js", "snowball.js", "tests.js", "setup.js",
+            "app1.js", "app2.js", "app3.js", "ide.js", "app4.js"]
 
 shell = (SRC / "shell.html").read_text(encoding="utf-8")
 css = (SRC / "style.css").read_text(encoding="utf-8")

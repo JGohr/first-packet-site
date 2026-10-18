@@ -176,6 +176,25 @@ figure.fig figcaption{margin-top:12px;font-size:14px;color:var(--muted);line-hei
 .lensrow.blue h4{color:var(--c-blue)} .lensrow.green h4{color:var(--c-green)} .lensrow.red h4{color:var(--c-red)} .lensrow.purple h4{color:var(--c-purple)}
 .lensrow p{color:var(--body);font-size:15.5px;line-height:1.6}
 
+/* In-browser editor */
+.ide{border:1px solid var(--hair2);border-radius:var(--r);overflow:hidden;background:var(--deep)}
+.ide-bar,.ide-foot{display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--soft);font-size:12.5px;color:var(--muted)}
+.ide-bar{border-bottom:1px solid var(--hair)}
+.ide-bar .ide-keys{margin-left:auto;color:var(--faint)}
+.ide-foot{border-top:1px solid var(--hair)}
+.ide-st{margin-right:auto}
+.ide-code{display:block;width:100%;border:0;margin:0;padding:12px 14px;background:var(--deep);color:var(--ink);font-family:var(--f-mono);font-size:13px;line-height:1.6;white-space:pre;overflow:auto;tab-size:4;resize:vertical;outline:none}
+.ide-code:focus{box-shadow:inset 0 0 0 1px var(--primary)}
+.ide-out{border-top:1px solid var(--hair);padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.ide-sum{font-weight:600;font-size:14.5px}
+.ide-sum.ok,.ide-t.ok .mk{color:var(--c-green)} .ide-sum.bad,.ide-t.bad .mk{color:var(--c-red)}
+.ide-t{font-size:14px;color:var(--body)}
+.ide-t .mk{display:inline-block;width:20px;font-weight:700}
+.ide-d{margin:6px 0 4px 20px;display:grid;gap:3px}
+.ide-d b{font-size:12px;font-weight:600;color:var(--muted)}
+.ide-d pre,.ide-log{margin:0;background:var(--soft);border-radius:6px;padding:8px 10px;font-family:var(--f-mono);font-size:12.5px;line-height:1.55;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
+.ide-note{font-size:14px;color:var(--muted)}
+
 /* Problems */
 .psets{display:flex;flex-direction:column;gap:16px}
 .prob{border:1px solid var(--hair);border-radius:var(--r-lg);overflow:hidden;scroll-margin-top:70px;background:var(--bg)}
@@ -281,6 +300,7 @@ textarea{width:100%;min-height:104px;background:var(--soft);border:1px solid var
   .doc{padding-top:28px}
 }
 @media (max-width:640px){
+  .ide-bar .ide-keys{display:none}
   .top nav a.hide-s,.crumb{display:none}
   .tints,.ideas,.io,.gallery{grid-template-columns:minmax(0,1fr)}
   .prob-h{grid-template-columns:minmax(0,1fr)}

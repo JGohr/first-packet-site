@@ -1,6 +1,6 @@
 /* Part 1: state, helpers, landing */
-var KEY='first-packet-v2', S={done:{},ans:{},setup:{}};
-try{var raw=localStorage.getItem(KEY);if(raw){var pp=JSON.parse(raw);if(pp&&typeof pp==='object'){S.done=pp.done||{};S.ans=pp.ans||{};S.setup=pp.setup||{};}}}catch(e){}
+var KEY='first-packet-v2', S={done:{},ans:{},setup:{},code:{}};
+try{var raw=localStorage.getItem(KEY);if(raw){var pp=JSON.parse(raw);if(pp&&typeof pp==='object'){S.done=pp.done||{};S.ans=pp.ans||{};S.setup=pp.setup||{};S.code=pp.code||{};}}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 
 var PAGES=WEEKS.concat([FINAL]);

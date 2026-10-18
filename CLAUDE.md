@@ -7,7 +7,7 @@ First Packet: a single-page, static course site (no framework, no bundler, no de
 
 ## Golden rules
 - **Edit `src/`, never `index.html` directly.** Run `python3 build.py` after every change and commit both.
-- No external scripts. The only external resource is Google Fonts (Inter, JetBrains Mono).
+- No external scripts. The only external resources are Google Fonts (Inter, JetBrains Mono) and Pyodide (jsDelivr), which loads in a Web Worker only when a learner first clicks Run in the code editor.
 - Keep it dependency-free and working from a plain static host.
 - Progress lives in `localStorage` under the key `first-packet-v2`. Changing the shape of saved data needs a migration, or learners lose progress.
 - Theme: single dark theme. Colors are CSS tokens on `:root` in `style.css`; diagrams use the hex palette object `C` at the top of `diagrams.js`.
@@ -18,10 +18,11 @@ First Packet: a single-page, static course site (no framework, no bundler, no de
 - Check types: `num` (a, tol, unit), `text` (acc: lowercase accepted answers), `choice` (o, a = index), `explain` (model answer, self-graded).
 - `EMBER[weekId]`: `ms` (milestone), `carry`, `unlock`. Refs are `[weekId | "Setup" | "final", text]`.
 - `LENSCASE[weekId]`: one real-world scenario traced through think/design/protect/attack/innovate.
+- `TESTS[psetId]` (tests.js): in-browser Python tests for pure-logic problems. `stub` (editor starter when the problem has no `starter`), `tests` [{pre, run, want, show, hide}]. A test passes when `eval(run) == eval(want)`. Passing every test ticks Solved. Learner code saves to `S.code`.
 - `snowball.js` also overrides some problem sets and checks by id. Check it before editing those weeks.
 
 ## Routing
-Hash routes: `#home`, `#setup`, `#w0`…`#w13`, `#final`. Rendering lives in `app3.js`; routing and events live in `app4.js`.
+Hash routes: `#home`, `#setup`, `#w0`…`#w13`, `#final`. Rendering lives in `app3.js`; routing and events live in `app4.js`; the code editor and Pyodide worker live in `ide.js`.
 
 ## Content guidelines
 - Big picture first, then detail. If an idea can't be explained in a few sentences, simplify it.
@@ -29,4 +30,4 @@ Hash routes: `#home`, `#setup`, `#w0`…`#w13`, `#final`. Rendering lives in `ap
 - Every attack exercise is lab-only (the learner's own VMs or purpose-built practice platforms) and ends in a detection or a fix.
 
 ## Testing
-After `python3 build.py`, serve the folder (`python3 -m http.server`) and click through Home, Setup, a few weeks and Final. Check that answer checking and the Solved checkboxes update the sidebar counts.
+After `python3 build.py`, serve the folder (`python3 -m http.server`) and click through Home, Setup, a few weeks and Final. Check that answer checking and the Solved checkboxes update the sidebar counts. On a week with an editor (e.g. `#w0`), Run and Submit a solution and confirm a passing Submit ticks Solved.
