@@ -44,6 +44,10 @@ function renderSetup(){
   return h;
 }
 
+function ideasHTML(ideas){
+  return '<div class="ideas">'+ideas.map(function(x){return '<div class="idea"><h3>'+x[0]+'</h3><p class="sum">'+x[1]+'</p>'+(x[2]?'<p>'+x[2]+'</p>':'')+'</div>';}).join('')+'</div>';
+}
+
 function lensCaseHTML(c){
   var rows=[['think','Think','gray'],['design','Design','blue'],['protect','Protect','green'],['attack','Attack','red'],['innovate','Innovate','purple']];
   var h='<div class="case-h"><div class="case-top"><span class="lbl">The example</span><h3>'+esc(c.t)+'</h3></div>';
@@ -58,7 +62,7 @@ function renderWeekPage(w){
   h+='<h2 id="b-idea">The big idea</h2>'+callout('purple','★','','<div class="bigidea">'+w.big+'</div>')+stripHTML(w.strip);
   var D=DIAGRAMS[w.id];
   if(D)h+='<h2 id="b-fig">See it</h2><figure class="fig"><div class="scroll">'+D.svg+'</div><figcaption>'+esc(D.cap)+'</figcaption></figure>';
-  h+='<h2>Core ideas</h2><div class="ideas">'+w.ideas.map(function(x){return '<div class="idea"><h3>'+x[0]+'</h3><p>'+x[1]+'</p></div>';}).join('')+'</div>';
+  h+='<h2>Core ideas</h2>'+ideasHTML(w.ideas);
   h+='<h2>One example, five lenses</h2>'+lensCaseHTML(LENSCASE[w.id]);
   h+='<h2 id="b-ps">Problem set '+w.num+'</h2><div class="psets">'+w.psets.map(probHTML).join('')+'</div>';
   var s=stats(w);
@@ -77,7 +81,7 @@ function renderFinalPage(){
   h+=callout('gray','↩','What you\'re carrying in','Everything. Ember\'s transport (week 3), resolver (4), server (5), encryption (6), design (7), defenses (8), audit (9), accounts (10), scale-out (11), privacy (12) and fast path (13).');
   h+=callout('purple','★','',esc(w.blurb));
   h+='<h2>The four steps</h2><div class="steps">'+w.steps.map(function(s,i){return '<div class="step"><span class="n">'+(i+1)+'</span><div class="sb"><h3>'+s[0]+'</h3><p>'+s[1]+'</p></div></div>';}).join('')+'</div>';
-  h+='<h2>Project ideas</h2><div class="ideas">'+w.ideas.map(function(x){return '<div class="idea"><h3>'+x[0]+'</h3><p>'+x[1]+'</p></div>';}).join('')+'</div>';
+  h+='<h2>Project ideas</h2>'+ideasHTML(w.ideas);
   h+='<h2>Submission</h2><div class="psets">'+probHTML(w.pset)+'</div>';
   var p=PAGES[PAGES.length-2];
   return h+pagerHTML([p.id,label(p)+' · '+p.title],['home','Course home']);
