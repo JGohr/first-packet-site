@@ -1,0 +1,119 @@
+<title>First Packet</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/*CSS*/
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="First Packet home">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><rect x="1" y="1" width="20" height="20" rx="5" fill="none" stroke="#8b7cf6" stroke-width="1.5"/><rect x="5" y="5" width="12" height="12" rx="3" fill="none" stroke="#6cb4e0" stroke-width="1.5"/><rect x="9" y="9" width="4" height="4" rx="1" fill="#8b7cf6"/></svg>
+      First Packet
+    </a>
+    <div class="crumb"><span>/</span><span id="crumbCur">Home</span></div>
+    <nav>
+      <a href="#home" id="navHome">Home</a>
+      <a href="#setup" class="hide-s">Setup</a>
+      <a href="#w0" class="hide-s">Week 0</a>
+      <span class="pchip" id="pchip">0 / 0 done</span>
+    </nav>
+  </div>
+</header>
+
+<main id="landing">
+  <section class="hero">
+    <div class="dots" aria-hidden="true">
+      <i style="left:6%;top:18%;background:#ffa344"></i><i style="left:44%;top:10%;background:#6cb4e0"></i><i style="left:3%;top:78%;background:#ec7cb9"></i>
+      <i style="left:52%;top:84%;background:#5fc4ad"></i><i style="left:94%;top:14%;background:#ffdc49"></i><i style="left:90%;top:80%;background:#b3a5ff"></i>
+    </div>
+    <div class="wrap">
+      <div>
+        <span class="lbl">A first-principles course · Networks &amp; compute</span>
+        <h1>Learn the network by building one.</h1>
+        <p class="lede">Fourteen weeks from the speed of light to the frontier. Each week adds a layer of understanding and a piece of Ember, a messaging platform you build from scratch, defend, attack and ship as your final project.</p>
+        <div class="ctas"><a class="btn light" href="#setup">Set up your lab</a><a class="btn" href="#w0">Start week 0</a></div>
+        <div class="facts">
+          <div><b>14</b><span>weeks + capstone</span></div>
+          <div><b>44</b><span>problem sets</span></div>
+          <div><b>64</b><span>self-checks</span></div>
+          <div><b>1</b><span>system you build</span></div>
+        </div>
+      </div>
+      <div class="mock" aria-label="Encapsulation: application data wrapped in TCP, IP and Ethernet headers">
+        <div class="mock-bar"><i></i><i></i><i></i></div>
+        <div class="mock-body">
+          <div class="ic">L2</div>
+          <h4>Every lesson in one picture</h4>
+          <div class="layer l1"><div class="lab"><b>Ethernet frame</b><span>L2 · one hop</span></div>
+            <div class="layer l2"><div class="lab"><b>IP packet</b><span>L3 · any distance</span></div>
+              <div class="layer l3"><div class="lab"><b>TCP segment</b><span>L4 · reliable</span></div>
+                <div class="layer l4"><div class="lab"><b>Ember message</b><span>L7 · what you meant</span></div>
+                  <div class="payload">{"room":"lab","text":"hello"}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p>Each layer solves one problem and trusts the layer below for the rest. Most bugs, designs and attacks live in the seams between them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-h"><span class="lbl">How it works</span><h2>One system, five ways of looking at it</h2><p class="intro">Certifications slice networking into separate exams. This course keeps it whole. Every week follows one real-world example through all five lenses, so you practice seeing a system the way designers, defenders and attackers each do.</p></div>
+      <div class="tints">
+        <div class="tint blue"><h3>Think</h3><p>What problem does this solve, and what does it assume? Say it in three sentences before any detail.</p></div>
+        <div class="tint green"><h3>Design</h3><p>How would you build it for 10 users, then 10,000? What breaks, and how far does the damage spread?</p></div>
+        <div class="tint orange"><h3>Protect</h3><p>What could go wrong on purpose? How would you see it happen, and what stops it?</p></div>
+        <div class="tint red"><h3>Attack</h3><p>Which assumption can be violated? Explored only in your own lab, always ending in the fix.</p></div>
+        <div class="tint purple"><h3>Innovate</h3><p>Knowing what we know now, what would you change if you designed it today?</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-h"><span class="lbl">The snowball</span><h2>Every week builds on the last</h2><p class="intro">Each week opens with what you're carrying in and closes with what it unlocks. Your code keeps getting reused: the reliable transport becomes Ember's protocol, the chat server becomes Ember's core, and the resolver and load balancer end up routing Ember's users.</p></div>
+      <div class="table"><table>
+        <thead><tr><th>Week</th><th>Topic</th><th>You build</th><th>Ember gains</th></tr></thead>
+        <tbody id="roadmap"></tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-h"><span class="lbl">Problem sets</span><h2>Every problem reads like a coding challenge</h2><p class="intro">Coding and CTF problems are written like LeetCode: a precise statement, input and output, worked examples, constraints and starter code. Lab and design problems keep the same shape, with steps instead of I/O. Each week ends with a self-check you can submit and grade.</p></div>
+      <div class="tints" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+        <div class="tint purple"><h3>Statement + I/O</h3><p>Exactly what to build, its signature, and what it returns.</p></div>
+        <div class="tint blue"><h3>Examples</h3><p>Inputs, expected outputs and why. Your code must reproduce them.</p></div>
+        <div class="tint orange"><h3>Constraints</h3><p>Limits on size, time and tools that force the real design decisions.</p></div>
+        <div class="tint green"><h3>Acceptance</h3><p>A checklist that defines “done.” Tick Solved only when every item holds.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-h"><span class="lbl">Course</span><h2>All pages</h2></div>
+      <div class="gallery" id="gallery"></div>
+    </div>
+  </section>
+  <footer><div class="wrap">Built in the spirit of CS50: big ideas first, hard problems second, memorization never. Progress and answers are saved in this browser only.</div></footer>
+</main>
+
+<div id="workspace" class="ws" hidden>
+  <aside class="side" id="side" aria-label="Course pages"></aside>
+  <div style="min-width:0">
+    <div class="jump" id="jump"></div>
+    <main class="doc" id="doc"></main>
+  </div>
+</div>
+
+<script>
+/*JS*/
+</script>
