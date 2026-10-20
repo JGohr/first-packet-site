@@ -28,7 +28,7 @@ function callout(color,icon,title,body){
 }
 
 function renderSetup(){
-  var h='<div class="p-icon">S</div><h1>Setup: build your lab</h1>';
+  var h='<div class="p-icon">Setup</div><h1>Setup: build your lab</h1>';
   h+=callout('purple','i','',SETUP.intro);
   h+=callout('red','!','Rules of the range','Only scan, probe or attack machines you own (your lab and target VMs) or platforms built for practice. Unauthorized access to anyone else\'s systems is a crime, including your employer\'s without written permission.');
   h+='<h2>Steps</h2><div class="steps">';
@@ -57,7 +57,7 @@ function lensCaseHTML(c){
 
 function renderWeekPage(w){
   var E=EMBER[w.id],i=PAGES.indexOf(w),h='';
-  h+='<div class="p-icon">'+w.num+'</div><h1>'+esc(w.h1)+'</h1>';
+  h+='<div class="p-icon">Section: '+w.num+'</div><h1>'+esc(w.h1)+'</h1>';
   h+=callout('gray','↩','What you\'re carrying in','<ul>'+E.carry.map(function(r){return '<li>'+refLink(r)+'</li>';}).join('')+'</ul>');
   h+='<h2 id="b-idea">The big idea</h2>'+callout('purple','★','','<div class="bigidea">'+w.big+'</div>')+stripHTML(w.strip);
   if(w.terms)h+='<h2 id="b-terms">Key terms</h2><dl class="terms">'+w.terms.map(function(t){return '<div><dt>'+t[0]+'</dt><dd>'+t[1]+'</dd></div>';}).join('')+'</dl>';
@@ -78,7 +78,7 @@ function renderWeekPage(w){
 }
 
 function renderFinalPage(){
-  var w=FINAL,h='<div class="p-icon">F</div><h1>'+esc(w.h1)+'</h1>';
+  var w=FINAL,h='<div class="p-icon">Capstone</div><h1>'+esc(w.h1)+'</h1>';
   h+=callout('gray','↩','What you\'re carrying in','Everything. Ember\'s transport (section 3), resolver (4), server (5), encryption (6), design (7), defenses (8), audit (9), accounts (10), scale-out (11), privacy (12) and fast path (13).');
   h+=callout('purple','★','',esc(w.blurb));
   h+='<h2>The four steps</h2><div class="steps">'+w.steps.map(function(s,i){return '<div class="step"><span class="n">'+(i+1)+'</span><div class="sb"><h3>'+s[0]+'</h3><p>'+s[1]+'</p></div></div>';}).join('')+'</div>';
