@@ -2,10 +2,10 @@
 function list(items,cls){return '<ul'+(cls?' class="'+cls+'"':'')+'>'+items.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul>';}
 
 function probHTML(p){
-  var d=!!S.done[p.id],h='<article class="prob'+(d?' done':'')+'">';
-  h+='<div class="prob-h"><div><div class="id">Problem '+esc(p.id)+'</div><h3>'+esc(p.title)+'</h3><div class="chips">'
+  var d=!!S.done[p.id],h='<article class="prob'+(d?' done':'')+'"><details'+(S.code[p.id]!=null?' open':'')+'>';
+  h+='<summary class="prob-h"><div><div class="id">Problem '+esc(p.id)+'</div><h3>'+esc(p.title)+'</h3><div class="chips">'
     +'<span class="tools-l">Tools</span><span class="tag gray">'+esc(p.lang)+'</span></div></div>'
-    +'<label class="done-t"><input type="checkbox" data-done="'+p.id+'"'+(d?' checked':'')+'> Solved</label></div><div class="prob-b">';
+    +'<label class="done-t"><input type="checkbox" data-done="'+p.id+'"'+(d?' checked':'')+'> Solved</label></summary><div class="prob-b">';
   h+='<div class="ps"><h4>Problem</h4><p>'+p.problem+'</p>'+(p.builds?'<p class="builds">↳ '+esc(p.builds)+'</p>':'')+'</div>';
   if(p.input)h+='<div class="ps"><h4>Input / output</h4><div class="io"><div><b>Input</b><span>'+p.input+'</span></div><div><b>Output</b><span>'+p.output+'</span></div></div></div>';
   if(p.task)h+='<div class="ps"><h4>'+(p.input?'Steps':'Task')+'</h4><ol>'+p.task.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ol></div>';
@@ -28,7 +28,7 @@ function probHTML(p){
   h+='<div class="ps"><h4>Acceptance criteria</h4>'+list(p.accept,'todo')+'</div>';
   if(p.stretch)h+='<div class="ps"><h4>Stretch</h4>'+list(p.stretch)+'</div>';
   if(p.model)h+='<div class="ps"><h4>Model answer</h4><details class="tog"><summary>Show it once you’ve written yours</summary><div class="tb">'+p.model+'</div></details></div>';
-  return h+'</div></article>';
+  return h+'</div></details></article>';
 }
 
 function answerText(q){

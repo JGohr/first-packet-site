@@ -222,8 +222,13 @@ figure.fig figcaption{margin-top:12px;font-size:14px;color:var(--muted);line-hei
 .psets{display:flex;flex-direction:column;gap:16px}
 .prob{border:1px solid var(--hair);border-radius:var(--r-lg);overflow:hidden;scroll-margin-top:70px;background:var(--bg)}
 .prob.done{border-color:rgba(95,196,173,.5)}
-.prob-h{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;align-items:start;padding:16px 18px;background:var(--soft);border-bottom:1px solid var(--hair)}
+.prob-h{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;align-items:start;padding:16px 18px;background:var(--soft);border-bottom:1px solid var(--hair);cursor:pointer;list-style:none}
+.prob-h::-webkit-details-marker{display:none}
+.prob-h:hover h3{color:var(--accent)}
+.prob>details:not([open])>.prob-h{border-bottom:0}
 .prob-h .id{font-size:12.5px;color:var(--muted);font-family:var(--f-mono)}
+.prob-h .id::before{content:"▸";display:inline-block;width:14px;font-size:11px;transition:transform .15s}
+.prob>details[open]>.prob-h .id::before{transform:rotate(90deg)}
 .prob-h h3{font-size:19px;font-weight:700;margin:2px 0 9px}
 .prob-h .chips{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .prob-h .tools-l{font-size:12.5px;color:var(--muted);margin-right:2px}
@@ -1958,10 +1963,10 @@ function renderLanding(){
 function list(items,cls){return '<ul'+(cls?' class="'+cls+'"':'')+'>'+items.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul>';}
 
 function probHTML(p){
-  var d=!!S.done[p.id],h='<article class="prob'+(d?' done':'')+'">';
-  h+='<div class="prob-h"><div><div class="id">Problem '+esc(p.id)+'</div><h3>'+esc(p.title)+'</h3><div class="chips">'
+  var d=!!S.done[p.id],h='<article class="prob'+(d?' done':'')+'"><details'+(S.code[p.id]!=null?' open':'')+'>';
+  h+='<summary class="prob-h"><div><div class="id">Problem '+esc(p.id)+'</div><h3>'+esc(p.title)+'</h3><div class="chips">'
     +'<span class="tools-l">Tools</span><span class="tag gray">'+esc(p.lang)+'</span></div></div>'
-    +'<label class="done-t"><input type="checkbox" data-done="'+p.id+'"'+(d?' checked':'')+'> Solved</label></div><div class="prob-b">';
+    +'<label class="done-t"><input type="checkbox" data-done="'+p.id+'"'+(d?' checked':'')+'> Solved</label></summary><div class="prob-b">';
   h+='<div class="ps"><h4>Problem</h4><p>'+p.problem+'</p>'+(p.builds?'<p class="builds">↳ '+esc(p.builds)+'</p>':'')+'</div>';
   if(p.input)h+='<div class="ps"><h4>Input / output</h4><div class="io"><div><b>Input</b><span>'+p.input+'</span></div><div><b>Output</b><span>'+p.output+'</span></div></div></div>';
   if(p.task)h+='<div class="ps"><h4>'+(p.input?'Steps':'Task')+'</h4><ol>'+p.task.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ol></div>';
@@ -1984,7 +1989,7 @@ function probHTML(p){
   h+='<div class="ps"><h4>Acceptance criteria</h4>'+list(p.accept,'todo')+'</div>';
   if(p.stretch)h+='<div class="ps"><h4>Stretch</h4>'+list(p.stretch)+'</div>';
   if(p.model)h+='<div class="ps"><h4>Model answer</h4><details class="tog"><summary>Show it once you’ve written yours</summary><div class="tb">'+p.model+'</div></details></div>';
-  return h+'</div></article>';
+  return h+'</div></details></article>';
 }
 
 function answerText(q){
